@@ -1,0 +1,21 @@
+PROJETO: CORRE NA MADRUGADA
+============================
+
+Estrutura de pastas organizada:
+
+corre-na-madrugada/
+├── index.html          -> Estrutura principal da página e interface
+├── css/
+│   └── style.css       -> Estilos visuais, cores noturnas e responsividade
+├── js/
+│   ├── map-data.js     -> Dados do mapa, ruas, quarteirões, becos, casas e viaturas
+│   ├── renderer.js     -> Motor de desenho 2D no Canvas (luzes, giroflex, personagens)
+│   ├── audio.js        -> Controle da trilha sonora de fundo
+│   └── game.js         -> Loop principal, movimentação, colisões e controles
+└── assets/
+    └── (coloque aqui o seu arquivo de áudio como "musica.mp3")
+
+COMO EXECUTAR:
+1. Extraia esta pasta ZIP em seu computador.
+2. (Opcional) Coloque o arquivo de áudio da música dentro da pasta "assets/" com o nome "musica.mp3".
+3. Abra o arquivo "index.html" em qualquer navegador moderno (Chrome, Edge, Firefox).

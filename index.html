@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Corre na Madrugada</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-template-id="_page-root" class="app-shell">
+  <div class="layout">
+    <header class="top">
+      <div class="heading-area">
+        <p data-template-id="eyebrow" class="eyebrow">PELAS MADRUGADAS • VISÃO DE CRIA</p>
+        <h1 data-template-id="game-title">Corre na Madrugada</h1>
+        <p data-template-id="game-description" class="description">Escute as sirenes de longe, corte pelos becos com Jaya e Don e não olhe na cara de nenhum policial.</p>
+      </div>
+      <div class="audio-area">
+        <button id="sound-button" type="button" class="sound-button" aria-pressed="false">
+          <span data-template-id="sound-play-label">▶ Tocar Trilha Sonora</span>
+          <span data-template-id="sound-pause-label" hidden>⏸ Pausar Trilha Sonora</span>
+        </button>
+        <p id="sound-feedback" class="sound-feedback" role="status" hidden></p>
+        <audio id="soundtrack" loop preload="none"></audio>
+      </div>
+    </header>
+
+    <main class="columns">
+      <section class="play-column" aria-label="Área do jogo">
+        <div class="game-frame">
+          <canvas id="game" aria-label="Mapa jogável visto de cima com casas, becos, ruas, viaturas, Don, Jaya e pontos brilhantes"></canvas>
+          <div id="hud" class="hud" aria-live="polite" hidden>
+            <div id="selected-hud" class="chip">Câmera: Jaya</div>
+            <div id="progress-hud" class="chip">Ouro Minerado: 0 / 3</div>
+          </div>
+          <div id="start-screen" class="start-screen" aria-labelledby="start-title">
+            <div class="start-card">
+              <h2 id="start-title" data-template-id="start-title">Corre na Madrugada</h2>
+              <p data-template-id="start-description">A madrugada é fria. Percorra as ruas com Jaya e Don, encontre os três pontos dourados e corte caminho pelos becos.</p>
+              <button type="button" id="start-game" data-template-id="start-button" class="start-button">Jogar</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="diagnostic" class="diagnostic" role="alert" hidden></div>
+
+        <div data-template-id="message-panel" class="message-panel">
+          <span aria-hidden="true">✦</span>
+          <p id="message" role="status">Se escutar a sirene na marginal, não fique parado: use os becos para despistar a viatura.</p>
+        </div>
+
+        <div id="game-controls" class="controls" hidden>
+          <button type="button" id="select-don" data-template-id="select-don" class="control-btn" aria-pressed="false">1 · Seguir Don</button>
+          <button type="button" id="select-jaya" data-template-id="select-jaya" class="control-btn" aria-pressed="true">2 · Seguir Jaya</button>
+          <button type="button" id="interact" data-template-id="interact-button" class="control-btn">E · Interagir</button>
+        </div>
+      </section>
+
+      <aside class="sidebar">
+        <section data-template-id="portrait-panel" class="panel">
+          <div class="night-art" role="img" aria-label="Ilustração noturna de Don e Jaya diante das casas do bairro">
+            <div class="moon"></div>
+            <div class="hill"></div>
+            <div class="houses"></div>
+            <div class="art-person one"></div>
+            <div class="art-person two"></div>
+          </div>
+          <h2 data-template-id="portrait-heading">O sentimento aqui é frio</h2>
+          <p data-template-id="portrait-caption">De manhã ninguém vê, o movimento só acontece pela madrugada. Avance pelas vielas estreitas, desvie dos bloqueios e garanta o lucro do dia sem cair no flagrante.</p>
+        </section>
+
+        <section data-template-id="controls-panel" class="panel">
+          <h2 data-template-id="controls-heading" style="margin-top: 0;">Como jogar</h2>
+          <p data-template-id="keyboard-help">Movimente os dois personagens ao mesmo tempo. Selecione um deles para acompanhar com a câmera e interagir.</p>
+          <div class="shortcuts" aria-label="Atalhos de teclado">
+            <div><span class="kbd">W A S D</span> Jaya</div>
+            <div><span class="kbd">↑ ← ↓ →</span> Don</div>
+            <div><span class="kbd">1 / 2</span> câmera &nbsp; <span class="kbd">E</span> interagir</div>
+          </div>
+          <p data-template-id="touch-help">No celular, selecione um personagem e use as setas:</p>
+          <div class="dpad" aria-label="Controle direcional para toque">
+            <button type="button" class="control-btn" data-dir="up" style="grid-column:2" aria-label="Mover para cima">↑</button>
+            <button type="button" class="control-btn" data-dir="left" style="grid-column:1;grid-row:2" aria-label="Mover para a esquerda">←</button>
+            <button type="button" class="control-btn" data-dir="down" style="grid-column:2;grid-row:2" aria-label="Mover para baixo">↓</button>
+            <button type="button" class="control-btn" data-dir="right" style="grid-column:3;grid-row:2" aria-label="Mover para a direita">→</button>
+          </div>
+        </section>
+      </aside>
+    </main>
+
+    <footer>
+      <p data-template-id="footer-note">Inspirado na vivência noturna e nas rimas de Don Felipe &amp; JayA.</p>
+    </footer>
+  </div>
+
+  <!-- Scripts organizados por responsabilidade -->
+  <script src="js/map-data.js"></script>
+  <script src="js/renderer.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>

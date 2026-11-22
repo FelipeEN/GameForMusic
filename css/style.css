@@ -1,0 +1,476 @@
+:root {
+  --ink: #f4eee0;
+  --muted: #aebcc0;
+  --gold: #e9bb65;
+  --edge: #39484c;
+  --red: #ff425c;
+  --blue: #338dff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  width: 100%;
+}
+
+body {
+  color: var(--ink);
+  font-family: "DM Sans", "Trebuchet MS", sans-serif;
+}
+
+button {
+  font: inherit;
+}
+
+.app-shell {
+  width: 100%;
+  min-height: 100vh;
+  background: radial-gradient(circle at 78% 8%, #18333c 0%, #0d2028 38%, #07141c 100%);
+}
+
+.layout {
+  width: 100%;
+  max-width: 1450px;
+  margin: auto;
+  padding: 28px clamp(16px, 3vw, 42px);
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 22px;
+  margin-bottom: 24px;
+}
+
+.heading-area {
+  min-width: 0;
+}
+
+.eyebrow {
+  margin: 0 0 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+h1, h2, p {
+  margin-top: 0;
+}
+
+h1, h2 {
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+h1 {
+  margin-bottom: 8px;
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.description {
+  max-width: 730px;
+  margin-bottom: 0;
+  color: var(--muted);
+  line-height: 1.55;
+  font-size: 16px;
+}
+
+.audio-area {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  max-width: 280px;
+}
+
+.sound-button {
+  padding: 11px 17px;
+  border: 1px solid #c49c60;
+  border-radius: 11px;
+  background: #293335;
+  color: #f7d493;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  box-shadow: 0 0 22px #f3464d20, 0 0 22px #338dff18;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.sound-button:hover {
+  background: #394448;
+  transform: translateY(-2px);
+}
+
+.sound-feedback {
+  margin: 7px 0 0;
+  text-align: right;
+  color: #ffd59a;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.sound-feedback[hidden] {
+  display: none;
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 290px;
+  gap: 20px;
+}
+
+.play-column {
+  min-width: 0;
+}
+
+.game-frame {
+  position: relative;
+  overflow: hidden;
+  background: #101b23;
+  border: 1px solid #52636a;
+  border-radius: 19px;
+  box-shadow: 0 25px 65px #020b12af, 0 0 25px #fa354d13;
+}
+
+#game {
+  display: block;
+  width: 100%;
+  height: clamp(370px, 55vw, 610px);
+  min-height: 370px;
+  touch-action: none;
+  background: #101b23;
+}
+
+.start-screen {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+  background: radial-gradient(circle at center, #08151fe8 0%, #08151fc9 30%, #08151f2b 76%);
+}
+
+.start-screen[hidden],
+.hud[hidden],
+.controls[hidden],
+.diagnostic[hidden] {
+  display: none !important;
+}
+
+.start-card {
+  padding: 28px 30px;
+  border: 1px solid #d2aa716b;
+  border-radius: 17px;
+  background: #20282deb;
+  box-shadow: 0 20px 55px #000a, 0 0 34px #3158bb28;
+  max-width: 440px;
+  backdrop-filter: blur(5px);
+}
+
+.start-card h2 {
+  margin-bottom: 10px;
+  font-size: 24px;
+}
+
+.start-card p {
+  color: #c3ced0;
+  line-height: 1.5;
+  font-size: 16px;
+}
+
+.start-button {
+  min-width: 135px;
+  min-height: 49px;
+  padding: 10px 22px;
+  border: 1px solid #ffe0a4;
+  border-radius: 11px;
+  background: #e9bb65;
+  color: #142027;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 8px 24px #050c1766;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.start-button:hover {
+  background: #ffda96;
+  transform: translateY(-2px);
+}
+
+button:focus-visible {
+  outline: 3px solid #ffcf76;
+  outline-offset: 3px;
+}
+
+.hud {
+  position: absolute;
+  z-index: 4;
+  top: 14px;
+  left: 14px;
+  right: 14px;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.chip {
+  background: #141f28ed;
+  border: 1px solid #68757b;
+  padding: 8px 12px;
+  border-radius: 9px;
+  font: 600 13px "DM Sans", "Trebuchet MS", sans-serif;
+  box-shadow: 0 3px 14px #0008;
+}
+
+#progress-hud {
+  border-color: #a38151;
+  color: #ffe0a0;
+}
+
+.message-panel {
+  margin-top: 12px;
+  padding: 13px 16px;
+  border: 1px solid #384b52;
+  border-radius: 12px;
+  background: #232e33;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  box-shadow: inset 3px 0 #e1ae5a;
+}
+
+.message-panel p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.message-panel span {
+  color: #f1ba68;
+}
+
+.diagnostic {
+  margin-top: 12px;
+  padding: 12px 16px;
+  border: 1px solid #ba785e;
+  border-radius: 12px;
+  background: #352321;
+  color: #ffe0c7;
+  font-size: 14px;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 15px;
+}
+
+.control-btn {
+  min-height: 45px;
+  padding: 9px 13px;
+  border: 1px solid #596970;
+  border-radius: 12px;
+  background: #29353a;
+  color: #f4eee0;
+  cursor: pointer;
+  touch-action: none;
+  user-select: none;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.control-btn:hover {
+  background: #384a50;
+}
+
+.control-btn:active {
+  transform: scale(0.95);
+}
+
+.control-btn[aria-pressed="true"] {
+  background: #a9793f;
+  border-color: #e9bb65;
+  color: #121e25;
+}
+
+.sidebar {
+  display: grid;
+  align-content: start;
+  gap: 16px;
+}
+
+.panel {
+  padding: 16px;
+  background: #242d32;
+  border: 1px solid var(--edge);
+  border-radius: 16px;
+}
+
+.panel h2 {
+  margin: 13px 0 6px;
+  font-size: 24px;
+}
+
+.panel p {
+  color: #b8c3c5;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+.night-art {
+  position: relative;
+  height: 145px;
+  overflow: hidden;
+  border-radius: 13px;
+  background: radial-gradient(circle at 76% 18%, #445764 0%, #203441 19%, #101e2a 55%, #0a141d 100%);
+}
+
+.moon {
+  position: absolute;
+  right: 35px;
+  top: 17px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #f5d49a;
+  box-shadow: 0 0 35px #f9c87499;
+}
+
+.hill {
+  position: absolute;
+  bottom: -52px;
+  left: -10%;
+  width: 120%;
+  height: 115px;
+  border-radius: 50% 50% 0 0;
+  background: #20383d;
+  transform: rotate(-8deg);
+}
+
+.houses {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+  background: repeating-linear-gradient(90deg, #324047 0 20px, #edbd7377 20px 23px, #28343c 23px 43px, #edbd7377 43px 46px, #1b303a 46px 62px);
+}
+
+.night-art:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 30%, #ee365033 56%, transparent 67%),
+              linear-gradient(70deg, transparent 55%, #388afa27 83%, transparent);
+}
+
+.art-person {
+  position: absolute;
+  bottom: 0;
+  width: 24px;
+  height: 38px;
+  border-radius: 12px 12px 2px 2px;
+  background: #ca746b;
+  box-shadow: 0 -14px 0 -4px #d4a077;
+}
+
+.art-person.one {
+  left: 37%;
+}
+
+.art-person.two {
+  left: 52%;
+  background: #77b6c1;
+  box-shadow: 0 -14px 0 -4px #ae7660;
+}
+
+.shortcuts {
+  font-size: 13px;
+  line-height: 2;
+  color: #c3d0d2;
+  margin: 10px 0;
+}
+
+.kbd {
+  display: inline-block;
+  border: 1px solid #65757a;
+  border-bottom-width: 3px;
+  border-radius: 5px;
+  padding: 0 6px;
+  color: #ffe0a4;
+  line-height: 1.6;
+}
+
+.dpad {
+  display: grid;
+  grid-template-columns: repeat(3, 52px);
+  grid-template-rows: repeat(2, 48px);
+  gap: 5px;
+  justify-content: center;
+  margin-top: 14px;
+}
+
+.dpad button {
+  padding: 0;
+  font-size: 20px;
+}
+
+footer {
+  padding-top: 23px;
+  color: #91a8ad;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+  .columns {
+    grid-template-columns: 1fr;
+  }
+  .sidebar {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .night-art {
+    height: 115px;
+  }
+}
+
+@media (max-width: 580px) {
+  .top {
+    flex-direction: column;
+  }
+  .audio-area {
+    align-items: flex-start;
+  }
+  .sound-feedback {
+    text-align: left;
+  }
+  .sidebar {
+    grid-template-columns: 1fr;
+  }
+  #game {
+    height: 420px;
+  }
+  .chip {
+    font-size: 11px;
+    padding: 6px 8px;
+  }
+  .start-card {
+    padding: 20px;
+  }
+}
